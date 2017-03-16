@@ -1,6 +1,11 @@
 class TheatersController < ApplicationController
   def index
     @theaters = Theater.all
+    @location_hash = Gmaps4rails.build_markers(@theaters.where.not(:address_latitude => nil)) do |theater, marker|
+      marker.lat theater.address_latitude
+      marker.lng theater.address_longitude
+      marker.infowindow "<h5><a href='/theaters/#{theater.id}'>#{theater.name}</a></h5><small>#{theater.address_formatted_address}</small>"
+    end
 
     render("theaters/index.html.erb")
   end
