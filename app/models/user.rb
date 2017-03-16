@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   # Direct associations
 
+  has_many   :interests,
+             :class_name => "MovieWatchlist",
+             :dependent => :destroy
+
   has_many   :friend_requests_recieved,
              :class_name => "FriendRequest",
              :foreign_key => "recipient_id",
