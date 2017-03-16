@@ -10,7 +10,7 @@ class MovieWatchlistsController < ApplicationController
   end
 
   def index
-    @movie_watchlists = MovieWatchlist.all
+    @movie_watchlists = current_user.interests.page(params[:page]).per(10)
 
     render("movie_watchlists/index.html.erb")
   end
