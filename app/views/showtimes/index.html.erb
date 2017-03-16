@@ -22,8 +22,20 @@
       <tr>
         <td><%= showtime.datetime %></td>
         <td><%= showtime.time %></td>
-        <td><%= showtime.movie.title %></td>
-        <td><%= showtime.theater.name %></td>
+        <td>
+          <% if showtime.movie.present? %>
+            <a href="/movies/<%= showtime.movie.id %>">
+              <%= showtime.movie.title %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if showtime.theater.present? %>
+            <a href="/theaters/<%= showtime.theater.id %>">
+              <%= showtime.theater.name %>
+            </a>
+          <% end %>
+        </td>
         <td><%= showtime.quals %></td>
         <td><%= showtime.ticketurl %></td>
         <td>

@@ -12,10 +12,22 @@
       <dd><%= @showtime.time %></dd>
 
       <dt>Movie</dt>
-      <dd><%= @showtime.movie_id %></dd>
+      <dd>
+        <% if @showtime.movie.present? %>
+          <a href="/movies/<%= @showtime.movie_id %>">
+            <%= @showtime.movie.title %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Theater</dt>
-      <dd><%= @showtime.theater_id %></dd>
+      <dd>
+        <% if @showtime.theater.present? %>
+          <a href="/theaters/<%= @showtime.theater_id %>">
+            <%= @showtime.theater.name %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Quals</dt>
       <dd><%= @showtime.quals %></dd>

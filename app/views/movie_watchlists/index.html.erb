@@ -16,8 +16,20 @@
 
       <% @movie_watchlists.each do |movie_watchlist| %>
       <tr>
-        <td><%= movie_watchlist.user.email %></td>
-        <td><%= movie_watchlist.movie.title %></td>
+        <td>
+          <% if movie_watchlist.user.present? %>
+            <a href="/users/<%= movie_watchlist.user.id %>">
+              <%= movie_watchlist.user.email %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if movie_watchlist.movie.present? %>
+            <a href="/movies/<%= movie_watchlist.movie.id %>">
+              <%= movie_watchlist.movie.title %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/movie_watchlists/<%= movie_watchlist.id %>" class="btn btn-primary">Show</a>
           
