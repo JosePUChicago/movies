@@ -47,8 +47,6 @@ class MovieWatchlistsController < ApplicationController
 
   def update
     @movie_watchlist = MovieWatchlist.find(params[:id])
-
-    @movie_watchlist.user_id = params[:user_id]
     @movie_watchlist.movie_id = params[:movie_id]
 
     save_status = @movie_watchlist.save
