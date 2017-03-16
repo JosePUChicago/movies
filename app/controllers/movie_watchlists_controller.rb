@@ -1,5 +1,5 @@
 class MovieWatchlistsController < ApplicationController
-  before_action :current_user_must_be_movie_watchlist_user, :only => [:edit, :update, :destroy]
+  before_action :current_user_must_be_movie_watchlist_user, :only => [:show, :edit, :update, :destroy]
 
   def current_user_must_be_movie_watchlist_user
     movie_watchlist = MovieWatchlist.find(params[:id])
