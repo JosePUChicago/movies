@@ -26,3 +26,34 @@
     </div>
   </div>
 </div>
+
+<!-- A Theater has many showtimes -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Showtimes
+      </li>
+
+      <% @theater.showtimes.each do |showtime| %>
+        <li class="list-group-item">
+          <a href="/showtimes/<%= showtime.id %>">
+            <%= showtime.datetime %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/showtimes/<%= showtime.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/showtimes/<%= showtime.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_showtime/<%= showtime.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
