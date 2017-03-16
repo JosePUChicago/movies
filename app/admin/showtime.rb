@@ -1,5 +1,7 @@
 ActiveAdmin.register Showtime do
 
+ permit_params :datetime, :time, :movie_id, :theater_id, :quals, :ticketurl
+
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
