@@ -1,0 +1,40 @@
+<div class="page-header">
+  <h3>Showtime #<%= @showtime.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Datetime</dt>
+      <dd><%= @showtime.datetime %></dd>
+
+      <dt>Time</dt>
+      <dd><%= @showtime.time %></dd>
+
+      <dt>Movie</dt>
+      <dd><%= @showtime.movie_id %></dd>
+
+      <dt>Theater</dt>
+      <dd><%= @showtime.theater_id %></dd>
+
+      <dt>Quals</dt>
+      <dd><%= @showtime.quals %></dd>
+
+      <dt>Ticketurl</dt>
+      <dd><%= @showtime.ticketurl %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/showtimes" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/showtimes/<%= @showtime.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_showtime/<%= @showtime.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

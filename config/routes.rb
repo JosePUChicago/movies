@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Showtime resource:
+  # CREATE
+  get "/showtimes/new", :controller => "showtimes", :action => "new"
+  post "/create_showtime", :controller => "showtimes", :action => "create"
+
+  # READ
+  get "/showtimes", :controller => "showtimes", :action => "index"
+  get "/showtimes/:id", :controller => "showtimes", :action => "show"
+
+  # UPDATE
+  get "/showtimes/:id/edit", :controller => "showtimes", :action => "edit"
+  post "/update_showtime/:id", :controller => "showtimes", :action => "update"
+
+  # DELETE
+  get "/delete_showtime/:id", :controller => "showtimes", :action => "destroy"
+  #------------------------------
+
   # Routes for the Theater resource:
   # CREATE
   get "/theaters/new", :controller => "theaters", :action => "new"

@@ -1,0 +1,82 @@
+<!-- Validation failure messages -->
+<% if @showtime.errors.any? %>
+  <% @showtime.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Showtime #<%= @showtime.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_showtime/<%= @showtime.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for datetime -->
+      <div class="form-group">
+        <label for="datetime" class="control-label">
+          Datetime
+        </label>
+
+        <input type="text" id="datetime" name="datetime" placeholder="Datetime" class="form-control" value="<%= @showtime.datetime %>">
+      </div>
+
+      <!-- Label and input for time -->
+      <div class="form-group">
+        <label for="time" class="control-label">
+          Time
+        </label>
+
+        <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @showtime.time %>">
+      </div>
+
+      <!-- Label and input for movie_id -->
+      <div class="form-group">
+        <label for="movie_id" class="control-label">
+          Movie
+        </label>
+
+        <input type="text" id="movie_id" name="movie_id" placeholder="Movie" class="form-control" value="<%= @showtime.movie_id %>">
+      </div>
+
+      <!-- Label and input for theater_id -->
+      <div class="form-group">
+        <label for="theater_id" class="control-label">
+          Theater
+        </label>
+
+        <input type="text" id="theater_id" name="theater_id" placeholder="Theater" class="form-control" value="<%= @showtime.theater_id %>">
+      </div>
+
+      <!-- Label and input for quals -->
+      <div class="form-group">
+        <label for="quals" class="control-label">
+          Quals
+        </label>
+
+        <input type="text" id="quals" name="quals" placeholder="Quals" class="form-control" value="<%= @showtime.quals %>">
+      </div>
+
+      <!-- Label and input for ticketurl -->
+      <div class="form-group">
+        <label for="ticketurl" class="control-label">
+          Ticketurl
+        </label>
+
+        <input type="text" id="ticketurl" name="ticketurl" placeholder="Ticketurl" class="form-control" value="<%= @showtime.ticketurl %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Showtime
+      </button>
+      or
+      <a href="/showtimes/<%= @showtime.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
