@@ -1,6 +1,6 @@
 class ShowtimesController < ApplicationController
   def index
-    @showtimes = Showtime.all
+    @showtimes = Showtime.page(params[:page]).per(10)
 
     render("showtimes/index.html.erb")
   end
