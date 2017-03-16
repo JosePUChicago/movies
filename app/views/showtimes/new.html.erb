@@ -51,7 +51,7 @@
           Theater
         </label>
 
-        <input type="text" id="theater_id" name="theater_id" placeholder="Theater" class="form-control" value="<%= @showtime.theater_id %>">
+        <%= select_tag(:theater_id, options_from_collection_for_select(Theater.all, :id, :name, @showtime.theater_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for quals -->
