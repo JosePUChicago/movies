@@ -17,12 +17,14 @@
       <a href="/movie_watchlists" class="btn btn-primary">
         Back
       </a>
-      <a href="/movie_watchlists/<%= @movie_watchlist.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_movie_watchlist/<%= @movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      <% if current_user == @movie_watchlist.user %>
+        <a href="/movie_watchlists/<%= @movie_watchlist.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_movie_watchlist/<%= @movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
