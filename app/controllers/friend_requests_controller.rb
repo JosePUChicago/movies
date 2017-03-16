@@ -1,4 +1,14 @@
 class FriendRequestsController < ApplicationController
+  before_action :current_user_must_be_friend_request_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_friend_request_user
+    friend_request = FriendRequest.find(params[:id])
+
+    unless current_user == friend_request.recipient
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   before_action :current_user_must_be_friend_request_user, :only => [:show, :edit, :update, :destroy]
 
   def current_user_must_be_friend_request_user
