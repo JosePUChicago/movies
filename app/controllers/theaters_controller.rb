@@ -1,6 +1,7 @@
 class TheatersController < ApplicationController
   def index
-    @theaters = Theater.page(params[:page]).per(10)
+    @q = Theater.ransack(params[:q])
+    @theaters = @q.result(:distinct => true).includes(:showtimes).page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@theaters.where.not(:address_latitude => nil)) do |theater, marker|
       marker.lat theater.address_latitude
       marker.lng theater.address_longitude

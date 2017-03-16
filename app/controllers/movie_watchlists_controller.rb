@@ -10,7 +10,8 @@ class MovieWatchlistsController < ApplicationController
   end
 
   def index
-    @movie_watchlists = current_user.interests.page(params[:page]).per(10)
+    @q = current_user.interests.ransack(params[:q])
+      @movie_watchlists = @q.result(:distinct => true).includes(:movie, :user).page(params[:page]).per(10)
 
     render("movie_watchlists/index.html.erb")
   end

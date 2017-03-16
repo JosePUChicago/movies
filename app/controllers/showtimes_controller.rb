@@ -1,6 +1,7 @@
 class ShowtimesController < ApplicationController
   def index
-    @showtimes = Showtime.page(params[:page]).per(10)
+    @q = Showtime.ransack(params[:q])
+    @showtimes = @q.result(:distinct => true).includes(:movie, :theater).page(params[:page]).per(10)
 
     render("showtimes/index.html.erb")
   end
