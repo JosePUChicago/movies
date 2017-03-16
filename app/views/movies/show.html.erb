@@ -57,6 +57,65 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_showtime" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for datetime -->
+      <div class="form-group">
+        <label for="datetime" class="control-label">
+          Datetime
+        </label>
+
+        <input type="text" id="datetime" name="datetime" placeholder="Datetime" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for time -->
+      <div class="form-group">
+        <label for="time" class="control-label">
+          Time
+        </label>
+
+        <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for movie_id -->
+      <input type="hidden" name="movie_id" value="<%= @movie.id %>">
+
+      <!-- Label and input for theater_id -->
+      <div class="form-group">
+        <label for="theater_id" class="control-label">
+          Theater
+        </label>
+
+        <%= select_tag(:theater_id, options_from_collection_for_select(Theater.all, :id, :name), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for quals -->
+      <div class="form-group">
+        <label for="quals" class="control-label">
+          Quals
+        </label>
+
+        <input type="text" id="quals" name="quals" placeholder="Quals" class="form-control" value="">
+      </div>
+
+      <!-- Label and input for ticketurl -->
+      <div class="form-group">
+        <label for="ticketurl" class="control-label">
+          Ticketurl
+        </label>
+
+        <input type="text" id="ticketurl" name="ticketurl" placeholder="Ticketurl" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Showtime
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
@@ -88,6 +147,23 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_movie_watchlist" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for movie_id -->
+      <input type="hidden" name="movie_id" value="<%= @movie.id %>">
+
+      <button class="btn btn-block btn-success">
+        Create Movie Watchlist
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>

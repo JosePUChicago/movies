@@ -6,6 +6,7 @@ class TheatersController < ApplicationController
   end
 
   def show
+    @showtime = Showtime.new
     @theater = Theater.find(params[:id])
 
     render("theaters/show.html.erb")
