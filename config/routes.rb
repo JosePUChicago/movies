@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Movie_watchlist resource:
+  # CREATE
+  get "/movie_watchlists/new", :controller => "movie_watchlists", :action => "new"
+  post "/create_movie_watchlist", :controller => "movie_watchlists", :action => "create"
+
+  # READ
+  get "/movie_watchlists", :controller => "movie_watchlists", :action => "index"
+  get "/movie_watchlists/:id", :controller => "movie_watchlists", :action => "show"
+
+  # UPDATE
+  get "/movie_watchlists/:id/edit", :controller => "movie_watchlists", :action => "edit"
+  post "/update_movie_watchlist/:id", :controller => "movie_watchlists", :action => "update"
+
+  # DELETE
+  get "/delete_movie_watchlist/:id", :controller => "movie_watchlists", :action => "destroy"
+  #------------------------------
+
   # Routes for the Friend_request resource:
   # CREATE
   get "/friend_requests/new", :controller => "friend_requests", :action => "new"

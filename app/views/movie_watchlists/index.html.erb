@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Movie watchlists
+    <a href="/movie_watchlists/new" class="btn btn-lg btn-success">New Movie watchlist</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>User</th>
+        <th>Movie</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @movie_watchlists.each do |movie_watchlist| %>
+      <tr>
+        <td><%= movie_watchlist.user_id %></td>
+        <td><%= movie_watchlist.movie_id %></td>
+        <td>
+          <a href="/movie_watchlists/<%= movie_watchlist.id %>" class="btn btn-primary">Show</a>
+          <a href="/movie_watchlists/<%= movie_watchlist.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_movie_watchlist/<%= movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Movie Watchlist #<%= @movie_watchlist.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd><%= @movie_watchlist.user_id %></dd>
+
+      <dt>Movie</dt>
+      <dd><%= @movie_watchlist.movie_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/movie_watchlists" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/movie_watchlists/<%= @movie_watchlist.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_movie_watchlist/<%= @movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
