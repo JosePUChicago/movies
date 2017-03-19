@@ -7,20 +7,14 @@
     <dl class="dl-horizontal">
       <dt>User</dt>
       <dd>
-        <% if @movie_watchlist.user.present? %>
-          <a href="/users/<%= @movie_watchlist.user_id %>">
-            <%= @movie_watchlist.user.email %>
-          </a>
-        <% end %>
+        <%=@movie_watchlist.user.username%>
       </dd>
 
       <dt>Movie</dt>
       <dd>
-        <% if @movie_watchlist.movie.present? %>
-          <a href="/movies/<%= @movie_watchlist.movie_id %>">
+
             <%= @movie_watchlist.movie.title %>
-          </a>
-        <% end %>
+
       </dd>
 
     </dl>

@@ -1,124 +1,35 @@
 <div class="page-header">
-  <h3>Movie #<%= @movie.id %></h3>
+  <h3><%= @movie.title %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Title</dt>
-      <dd><%= @movie.title %></dd>
 
-      <dt>Poster</dt>
-      <dd><%= @movie.poster %></dd>
+
+
+      <dd><img src="<%= @movie.poster %>" width="250"></dd>
 
       <dt>Synopsis</dt>
       <dd><%= @movie.synopsis %></dd>
 
     </dl>
 
-    <div class="btn-group btn-group-justified">
-      <a href="/movies" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
-    </div>
+
+
   </div>
 </div>
 
 <!-- A Movie has many showtimes -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Showtimes
-      </li>
 
-      <% @movie.showtimes.each do |showtime| %>
-        <li class="list-group-item">
-          <a href="/showtimes/<%= showtime.id %>">
-            <%= showtime.datetime %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/showtimes/<%= showtime.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/showtimes/<%= showtime.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_showtime/<%= showtime.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_showtime" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for datetime -->
-      <div class="form-group">
-        <label for="datetime" class="control-label">
-          Datetime
-        </label>
-
-        <input type="text" id="datetime" name="datetime" placeholder="Datetime" class="form-control" value="">
-      </div>
 
       <!-- Label and input for time -->
-      <div class="form-group">
-        <label for="time" class="control-label">
-          Time
-        </label>
 
-        <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="">
-      </div>
 
       <!-- Label and input for movie_id -->
-      <input type="hidden" name="movie_id" value="<%= @movie.id %>">
 
-      <!-- Label and input for theater_id -->
-      <div class="form-group">
-        <label for="theater_id" class="control-label">
-          Theater
-        </label>
 
-        <%= select_tag(:theater_id, options_from_collection_for_select(Theater.all, :id, :name), :class => "form-control") %>
-      </div>
-
-      <!-- Label and input for quals -->
-      <div class="form-group">
-        <label for="quals" class="control-label">
-          Quals
-        </label>
-
-        <input type="text" id="quals" name="quals" placeholder="Quals" class="form-control" value="">
-      </div>
-
-      <!-- Label and input for ticketurl -->
-      <div class="form-group">
-        <label for="ticketurl" class="control-label">
-          Ticketurl
-        </label>
-
-        <input type="text" id="ticketurl" name="ticketurl" placeholder="Ticketurl" class="form-control" value="">
-      </div>
-
-      <button class="btn btn-block btn-success">
-        Create Showtime
-      </button>
-    </form>
-      </li>
-    </ul>
-  </div>
-</div>
 
 <!-- A Movie has many interests -->
 
@@ -126,13 +37,13 @@
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Interests
+        Who wants to watch?
       </li>
 
       <% @movie.interests.each do |movie_watchlist| %>
         <li class="list-group-item">
-          <a href="/movie_watchlists/<%= movie_watchlist.id %>">
-            <%= movie_watchlist.user_id %>
+          <a href="/users/<%= movie_watchlist.user_id %>">
+            <%= movie_watchlist.user.username %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
             <a href="/movie_watchlists/<%= movie_watchlist.id %>" class="btn btn-primary">
@@ -160,7 +71,7 @@
       <input type="hidden" name="movie_id" value="<%= @movie.id %>">
 
       <button class="btn btn-block btn-success">
-        Create Movie Watchlist
+        I want to see <%=@movie.title%>!
       </button>
     </form>
       </li>
@@ -169,32 +80,8 @@
 </div>
 
 <!-- A Movie has many users -->
-
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Users
-      </li>
-
-      <% @movie.users.each do |user| %>
-        <li class="list-group-item">
-          <a href="/users/<%= user.id %>">
-            <%= user.email %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/users/<%= user.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<div class="btn-group btn-group-justified">
+  <a href="/movies" class="btn btn-primary">
+    Back to movies
+  </a>
 </div>

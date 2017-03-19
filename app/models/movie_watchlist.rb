@@ -10,5 +10,6 @@ class MovieWatchlist < ApplicationRecord
   # Indirect associations
 
   # Validations
-
+validates :user, :presence=> true
+validates :movie, :presence=> true, :uniqueness=> {:scope=> :user}
 end

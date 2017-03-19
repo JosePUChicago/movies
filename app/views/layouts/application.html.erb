@@ -41,20 +41,19 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/movie_watchlists">Movie Watchlists</a></li>
-          <li><a href="/friend_requests">Friend Requests</a></li>
+          <li><a href="/movie_watchlists">My Movie Watchlists</a></li>
+
           <li><a href="/users">Users</a></li>
-          <li><a href="/showtimes">Showtimes</a></li>
-          <li><a href="/theaters">Theaters</a></li>
+
+
           <li><a href="/movies">Movies</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <% if current_user.present? %>
             <li>
               <a href="/users/edit">
-                <%= current_user.email %>
+                <%= current_user.username %>
               </a>
             </li>
 

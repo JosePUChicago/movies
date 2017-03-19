@@ -1,127 +1,51 @@
 <div class="page-header">
-  <h3>User #<%= @user.id %></h3>
+
+  <h3><%= @user.username %>
+
+  </h3>
+
+
+
+
+
 </div>
 
-<div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>Email</dt>
-      <dd><%= @user.email %></dd>
 
-      <dt>Password</dt>
-      <dd><%= @user.password %></dd>
+<div class="col-md-3">
+  <% friend_request = FriendRequest.find_by(:sender_id => current_user.id, :recipient_id => @user.id) %>
+  <% if friend_request.present? %>
+  <a href="/delete_friend_request/<%= friend_request.id %>" class="btn btn-success btn-block">
+    Following
+  </a>
+  <% else %>
+  <form action="/create_friend_request" method="post">
+    <!-- Hidden input for authenticity token to protect from forgery -->
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <dt>Username</dt>
-      <dd><%= @user.username %></dd>
+    <input type="hidden" id="sender_id" name="sender_id" value="<%= current_user.id %>">
 
-    </dl>
+    <input type="hidden" id="recipient_id" name="recipient_id" value="<%= @user.id %>">
 
-    <div class="btn-group btn-group-justified">
-      <a href="/users" class="btn btn-primary">
-        Back
-      </a>
-    </div>
-  </div>
+    <button class="btn btn-default btn-block">
+      Follow
+    </button>
+  </form>
+  <% end %>
 </div>
+
+
+
 
 <!-- A User has many friend_requests_sent -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Friend Requests Sent
-      </li>
-
-      <% @user.friend_requests_sent.each do |friend_request| %>
-        <li class="list-group-item">
-          <a href="/friend_requests/<%= friend_request.id %>">
-            <%= friend_request.sender_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/friend_requests/<%= friend_request.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == friend_request.recipient %>
-              <a href="/friend_requests/<%= friend_request.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_friend_request/<%= friend_request.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
 
 <!-- A User has many friend_requests_recieved -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Friend Requests Recieved
-      </li>
 
-      <% @user.friend_requests_recieved.each do |friend_request| %>
-        <li class="list-group-item">
-          <a href="/friend_requests/<%= friend_request.id %>">
-            <%= friend_request.sender_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/friend_requests/<%= friend_request.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == friend_request.recipient %>
-              <a href="/friend_requests/<%= friend_request.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_friend_request/<%= friend_request.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
 
 <!-- A User has many interests -->
 
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Interests
-      </li>
 
-      <% @user.interests.each do |movie_watchlist| %>
-        <li class="list-group-item">
-          <a href="/movie_watchlists/<%= movie_watchlist.id %>">
-            <%= movie_watchlist.user_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/movie_watchlists/<%= movie_watchlist.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <%if current_user == movie_watchlist.user %>
-              <a href="/movie_watchlists/<%= movie_watchlist.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <a href="/delete_movie_watchlist/<%= movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            <% end %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
 
 <!-- A User has many following -->
 
@@ -135,19 +59,9 @@
       <% @user.following.each do |user| %>
         <li class="list-group-item">
           <a href="/users/<%= user.id %>">
-            <%= user.email %>
+            <%= user.username %>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/users/<%= user.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
+
         </li>
       <% end %>
     </ul>
@@ -166,19 +80,9 @@
       <% @user.followers.each do |user| %>
         <li class="list-group-item">
           <a href="/users/<%= user.id %>">
-            <%= user.email %>
+            <%= user.username %>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/users/<%= user.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/users/<%= user.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_user/<%= user.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
+
         </li>
       <% end %>
     </ul>
@@ -199,17 +103,7 @@
           <a href="/movies/<%= movie.id %>">
             <%= movie.title %>
           </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/movies/<%= movie.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/movies/<%= movie.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_movie/<%= movie.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
+
         </li>
       <% end %>
     </ul>

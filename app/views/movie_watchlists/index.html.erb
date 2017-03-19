@@ -17,30 +17,27 @@
       <% @movie_watchlists.each do |movie_watchlist| %>
       <tr>
         <td>
-          <% if movie_watchlist.user.present? %>
-            <a href="/users/<%= movie_watchlist.user.id %>">
-              <%= movie_watchlist.user.email %>
+          <a href="/users/<%=movie_watchlist.user.id%>">
+
+              <%= movie_watchlist.user.username %>
             </a>
-          <% end %>
+
+
         </td>
         <td>
-          <% if movie_watchlist.movie.present? %>
-            <a href="/movies/<%= movie_watchlist.movie.id %>">
+          <a href="/movies/<%=movie_watchlist.movie.id%>">
               <%= movie_watchlist.movie.title %>
             </a>
-          <% end %>
+
         </td>
         <td>
           <a href="/movie_watchlists/<%= movie_watchlist.id %>" class="btn btn-primary">Show</a>
-          
-          <% if current_user == movie_watchlist.user %>
             <a href="/movie_watchlists/<%= movie_watchlist.id %>/edit" class="btn btn-warning">Edit</a>
             <a href="/delete_movie_watchlist/<%= movie_watchlist.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-          <% end %>
         </td>
       </tr>
       <% end %>
     </table>
-    <%= paginate @movie_watchlists, theme: 'twitter-bootstrap-4' %>
+
   </div>
 </div>
